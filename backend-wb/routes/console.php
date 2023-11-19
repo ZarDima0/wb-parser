@@ -1,5 +1,9 @@
 <?php
 
+use App\Jobs\ProcessCategoryJob;
+use App\Jobs\ProcessProductsJob;
+use App\Parser\Category\CategoryParser;
+use App\Services\Category\CategoryService;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 
@@ -17,3 +21,11 @@ use Illuminate\Support\Facades\Artisan;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
+
+Artisan::command('updateCategory', function () {
+    ProcessCategoryJob::dispatchSync();
+});
+
+Artisan::command('products', function () {
+    ProcessProductsJob::dispatchSync();
+});
